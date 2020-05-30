@@ -1,10 +1,13 @@
+// These two variables make you able to draw elements and interact with them on the HTML Canvas
 
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
-// These two variables make you able to draw elements and interact with them on the HTML Canvas
+
+// Variable for the background image
 
 var field = new Image(); field.src = "images/field.jpg";
-// Variable for the background image
+
+// Variables for the duck image, coordinates, and size.
 
 var duck = new Image(); duck.src = "images/simpleduck.png";
 var duckX = 1300;
@@ -14,7 +17,7 @@ var duckY = 150;
 var duckY2 = 450;
 var duckY3 = 0;
 
-// Variables for the duck image, coordinates, and size.
+// I drew a rectangle around the duck images for use with a hitbox / hit test function because its easier to use coordinates of an object you created rather than an image
 
 var rectX = duckX;
 var rectY = duckY;
@@ -23,7 +26,7 @@ var rectY2 = duckY2;
 var rectX3 = duckX3;
 var rectY3 = duckY3;
 
-// I drew a rectangle around the duck images for use with a hitbox / hit test function because its easier to use coordinates of an object you created rather than an image
+// These variables are images of the ammo counter in the bottom right.  Put into an array and using 'mag' to pick decide which image to draw.
 
 var ammo1 = new Image(); ammo1.src="images/ammo1.png";
 var ammo2 = new Image(); ammo2.src="images/ammo2.png";
@@ -32,7 +35,7 @@ var ammo4 = new Image(); ammo4.src="images/ammo4.png";
 var ammo = [ammo1, ammo2, ammo3, ammo4];
 var mag = 0;
 
-// These variables are images of the ammo counter in the bottom right.  Put into an array and using 'mag' to pick decide which image to draw.
+// These variables are for the crosshair image, coordinates and size.
 
 var xhair = new Image(); xhair.src="images/xhair copy.png";
 var xhairX = 600;
@@ -40,32 +43,35 @@ var xhairY = 360;
 var xhairW = 100;
 var xhairH = 100;
 
-// These variables are for the crosshair image, coordinates and size.
+// These variables are used for the speed of the image moving along the x-axis
 
 var dx = 5;
 var dx2 = 5;
 var dx3 = 5;
 
-var score = 0;
+// These variables are used in the hitTest function and initializes the score to 0
+
 var hit1 = false;
 var hit2 = false;
 var hit3 = false;
-
 var shot = false;
+
+// These variables are used to keep track of time with the counter, and the score
+
 var counter = 0;
+var score = 0;
+
+// These variables hold the different images that are displayed at the start of the game, and the win or loss screen
 
 var play = false;
 var startImg = new Image(); startImg.src="images/start.jpg";
 var win = new Image(); win.src="images/gameOverWin.png";
 var lose = new Image(); lose.src="images/gameOverLose.png";
-
 var gameOver = false;
-
 var endScreen = [startImg, win, lose];
 var WorL = 0;
 
-// The rest of these variable are just various things used throughout the program.
-
+// These functions draw 3 ducks with different speeds and coordinates.  Each duck has their own "hitbox" which is just a rectangle with the same coordinates and size as the duck images.
 
 function drawDuck()
 {
@@ -88,7 +94,7 @@ function drawDuck3()
 	ctx.fillRect(rectX3, rectY3, 100, 100);
 }
 
-// These functions draw 3 ducks with different speeds and coordinates.  Each duck has their own "hitbox" which is just a rectangle with the same coordinates and size as the duck images.
+// This function moves the ducks across the screen, and when it goes a certain distance it resets the X coordinate and changes the Y coordinates to a random number
 
 function moveDuck()
 {
@@ -127,15 +133,15 @@ function moveDuck()
 	
 }
 
-// This function moves the ducks across the screen, and when it goes a certain distance it resets the X coordinate and changes the Y coords and speed to a random number
+// These functions and event listeners draw the crosshair and enable you to control the crosshair with your mouse.
+
+document.addEventListener("mousemove", mouseMoveHandler, false);
 
 function drawXC()
 {
 	ctx.drawImage(xhair, xhairX, xhairY, xhairH, xhairW);
 }
 
-
-document.addEventListener("mousemove", mouseMoveHandler, false);
 
 function mouseMoveHandler(e)
 {
@@ -152,7 +158,7 @@ function mouseMoveHandler(e)
     }
 }
 
-// These functions and event listeners draw the crosshair and enable you to control the crosshair with your mouse. 
+// These functions draw the ammo and score.
 
 function drawText()
 {
@@ -166,7 +172,7 @@ function drawAmmo()
 	ctx.drawImage(ammo[mag], 525, canvas.height - 130, 200, 150);
 }
 
-// These functions draw the ammo and score.
+// This function determines whether or not the crosshair is over one of the duck images, and gives the input of whether or not you have clicked on one of the ducks.
 
 function shotFired()
 {
@@ -219,7 +225,7 @@ function shotFired()
 	}
 }
 
-// This function determines whether or not the crosshair is over one of the duck images, and gives the input of whether or not you have clicked on one of the ducks.
+// This function tests if a duck has been hit, and resets the position and speed of the duck after it is hit
 
 function hitTest()
 {
@@ -252,7 +258,8 @@ function hitTest()
 	
 }
 
-// This function adds score and resets the ducks when one of them has been hit
+// These functions make you able to interact with the canvas with your mouse and keyboard.  I made a reload, shoot, and stop shooting function.  They are all called by your mouse and keyboard. 
+
 
 function shootTest()
 {
@@ -298,8 +305,6 @@ function stopS()
 	}
 }
 
-// These functions make you able to interact with the canvas with your mouse and keyboard.  I made a reload, shoot, and stop shooting function.  They are all called by your mouse and keyboard. 
-
 
 document.addEventListener("click", restart, false);
 
@@ -310,6 +315,8 @@ function restart()
 
 }
 
+// These 2 functions draw an images whenever the game isnt running, and starts the game when you click on the canvas.
+
 function startScreen()
 {
 	if(play === false)
@@ -319,18 +326,18 @@ function startScreen()
 
 }
 
-// These 2 functions draw an images whenever the game isnt running, and starts the game when you click on the canvas.
+// This draws the background image
 
 function drawBack()
 {
 	ctx.drawImage(field, 0, 0, 1200, 720);
 }
 
-// This draws the background image
+// This function ends the game whenever the counter reaches 15, and sets the win or lose screen.  Once the game is over it resets all of the variables so you can play again
 
 function endGame()
 {
-	if(counter >= 6)
+	if(counter >= 15)
 	{
 		if(score >= 5000)
 		{
@@ -370,7 +377,7 @@ function endGame()
 	
 }
 
-// This function ends the game whenever the counter reaches 6, and sets the win or lose screen.  Once the game is over it resets all of the variables so you can play again
+// This function adds a counter and makes it work.
 
 function countDown()
 {
@@ -380,7 +387,7 @@ function countDown()
 	ctx.fillText("TIME: " + counter, 940, 50);
 }
 
-// This function adds a counter and makes it work.
+// This function is the one that actually draws everything on the canvas, and makes it look like a game with "requestAnimationFrame" 
 
 function draw()
 {
@@ -410,7 +417,6 @@ function draw()
 
 draw();
 
-// This function is the one that actually draws everything on the canvas, and makes it look like a game with "requestAnimationFrame" 
 
 
 
