@@ -393,6 +393,7 @@ function draw()
 		drawBack();
 		drawXC();
 		drawDuck();
+		moveDuck();
 		drawDuck2();
 		drawDuck3();
 		drawAmmo();
