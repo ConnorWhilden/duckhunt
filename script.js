@@ -228,7 +228,7 @@ function hitTest()
 		duckX = 1500;
 		score = score + 500;
 		duckY = Math.floor(Math.random() * (500 - 10)) + 10;
-		dx = Math.floor(Math.random() * (20 - 6)) + 6;
+		dx = 5;
 	
 	}
 	
@@ -237,7 +237,7 @@ function hitTest()
 		duckX2 = 1300;
 		score = score + 500;
 		duckY2 = Math.floor(Math.random() * (500 - 10)) + 10;
-		dx2 = Math.floor(Math.random() * (20 - 6)) + 6;
+		dx2 = 5;
 	
 	}
 	
@@ -246,8 +246,7 @@ function hitTest()
 		duckX3 = 1700;
 		score = score + 500;
 		duckY3 = Math.floor(Math.random() * (500 - 10)) + 10;
-		dx3 = Math.floor(Math.random() * (20 - 6)) + 6;
-		dx3 = 55;
+		dx3 = 5;
 
 	}
 	
