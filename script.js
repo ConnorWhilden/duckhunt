@@ -306,13 +306,15 @@ function stopS()
 }
 
 
-document.addEventListener("click", restart, false);
+window.onkeydown = function()
+	{
+		restart();
+	};
 
 function restart()
 {
 	play = true;
 	
-
 }
 
 // These 2 functions draw an images whenever the game isnt running, and starts the game when you click on the canvas.
@@ -352,6 +354,7 @@ function endGame()
 			dx3 = 5;
 			duckX = 1500;
 			duckX2 = 1700;
+
 ;
 			
 		}
@@ -391,9 +394,11 @@ function countDown()
 
 function draw()
 {
-	
-	startScreen();
-	
+	if(play === false)
+	{
+		startScreen();
+	}
+
 	if(play === true)
 	{
 		drawBack();
